@@ -30,6 +30,11 @@ public class DBManager {
         }
     }
 
+    public void persistService(Service service){
+        em.persist(service);
+        em.flush();
+    }
+
     public List<Service> getBoosting(){
         TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Boosting'", Service.class);
         return execute(query);

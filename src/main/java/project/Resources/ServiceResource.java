@@ -43,8 +43,7 @@ public class ServiceResource {
         service.setTitle(boosting.getString("title"));
         service.setServiceType("Boosting");
         service.setInGameName(boosting.getString("inGameName"));
-        dbManager.em.persist(service);
-        dbManager.em.flush();
+        dbManager.persistService(service);
         return Response.status(Response.Status.OK).build();
     }
 
