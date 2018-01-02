@@ -27,22 +27,25 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response getBoosting() {
-        List<Service> serviceList = dbManager.getBoostings();
+        List<Service> serviceList = dbManager.getBoosting();
         if(!serviceList.isEmpty()){
             return Response.status(Response.Status.OK).entity(serviceList).build();
         }else {
-            return Response.status(Response.Status.OK).entity("No service found.").build();
+            return Response.status(Response.Status.OK).entity("No boosting service found.").build();
         }
-        }
+    }
 
     @Path("boosting")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @POST
     public Response createBoosting(JsonObject boosting){
         Service service = new Service();
-        //TODO Set service property from Json object
-        return null;
+        service.setTitle(boosting.getString("title"));
+        service.setServiceType("Boosting");
+        service.setInGameName(boosting.getString("inGameName"));
+        dbManager.em.persist(service);
+        dbManager.em.flush();
+        return Response.status(Response.Status.OK).build();
     }
 
     @Path("boosting")
@@ -65,10 +68,11 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response getTeaming() {
-        if(!dbManager.em.createQuery("").getResultList().isEmpty()){
-            return Response.status(Response.Status.OK).entity(dbManager.em.createQuery("")).build();
-        } else {
-            return Response.status(Response.Status.OK).entity("No teaming services listed").build();
+        List<Service> serviceList = dbManager.getTeaming();
+        if(!serviceList.isEmpty()){
+            return Response.status(Response.Status.OK).entity(serviceList).build();
+        }else {
+            return Response.status(Response.Status.OK).entity("No teaming service found.").build();
         }
     }
 
@@ -101,10 +105,11 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response getCrafting() {
-        if(!dbManager.em.createQuery("").getResultList().isEmpty()){
-            return Response.status(Response.Status.OK).entity(dbManager.em.createQuery("")).build();
-        } else {
-            return Response.status(Response.Status.OK).entity("No crafting services listed").build();
+        List<Service> serviceList = dbManager.getCrafting();
+        if(!serviceList.isEmpty()){
+            return Response.status(Response.Status.OK).entity(serviceList).build();
+        }else {
+            return Response.status(Response.Status.OK).entity("No crafting service found.").build();
         }
     }
 
@@ -137,10 +142,11 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response getRotation() {
-        if(!dbManager.em.createQuery("").getResultList().isEmpty()){
-            return Response.status(Response.Status.OK).entity(dbManager.em.createQuery("")).build();
-        } else {
-            return Response.status(Response.Status.OK).entity("No rotation services listed").build();
+        List<Service> serviceList = dbManager.getRotation();
+        if(!serviceList.isEmpty()){
+            return Response.status(Response.Status.OK).entity(serviceList).build();
+        }else {
+            return Response.status(Response.Status.OK).entity("No rotation service found.").build();
         }
     }
 

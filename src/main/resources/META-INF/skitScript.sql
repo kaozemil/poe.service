@@ -1,2 +1,5 @@
       insert into SERVICE (TITLE, SERVICETYPE, INGAMENAME) values ('Best UBER booster RU', 'Boosting', 'RiPmASTer69')
       insert into SERVICE (TITLE, SERVICETYPE, INGAMENAME) values ('T15 Strand rotations', 'Rotation', 'KaomsDick22')
+      insert into SERVICE (TITLE, SERVICETYPE, INGAMENAME) values ('T15 Strand rotations', 'Boosting', 'KaomsDick22')
+      insert into SERVICE (TITLE, SERVICETYPE, INGAMENAME) values ('T15 Strand rotations', 'Rotation', 'KaomsDick22')
+      insert into SERVICE (TITLE, SERVICETYPE, INGAMENAME) values ('T15 Strand rotations', 'Rotation', 'KaomsDick22')

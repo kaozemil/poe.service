@@ -20,14 +20,33 @@ public class DBManager {
     EntityManager em;
 
 
-    public List getBoostings(){
-            TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Boosting'", Service.class);
-            if(!query.getResultList().isEmpty()) {
-                List<Service> services = query.getResultList();
-                return services;
-            } else {
-                List<Service> services = new ArrayList<Service>();
-                return services;
-            }
+    public List<Service> execute(TypedQuery query) {
+        if(!query.getResultList().isEmpty()) {
+            List<Service> services = query.getResultList();
+            return services;
+        } else {
+            List<Service> services = new ArrayList<Service>();
+            return services;
+        }
+    }
+
+    public List<Service> getBoosting(){
+        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Boosting'", Service.class);
+        return execute(query);
+    }
+
+    public List getTeaming(){
+        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Teaming'", Service.class);
+        return execute(query);
+    }
+
+    public List getCrafting(){
+        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Crafting'", Service.class);
+        return execute(query);
+    }
+
+    public List getRotation(){
+        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Rotation'", Service.class);
+        return execute(query);
     }
 }
