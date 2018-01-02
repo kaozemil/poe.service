@@ -14,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("service")
 @Stateless
@@ -26,12 +27,13 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @GET
     public Response getBoosting() {
-        if(!dbManager.em.createQuery("SELECT s FROM Service s", Service.class).getResultList().isEmpty()){
-            return Response.status(Response.Status.OK).entity(dbManager.em.createQuery("")).build();
-        } else {
-            return Response.status(Response.Status.OK).entity("No boosting services listed").build();
+        List<Service> serviceList = dbManager.getBoostings();
+        if(!serviceList.isEmpty()){
+            return Response.status(Response.Status.OK).entity(serviceList).build();
+        }else {
+            return Response.status(Response.Status.OK).entity("No service found.").build();
         }
-    }
+        }
 
     @Path("boosting")
     @Consumes(MediaType.APPLICATION_JSON)
