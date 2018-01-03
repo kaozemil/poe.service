@@ -1,6 +1,7 @@
 package project.entities;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.*;
 /**
  * Created by Emil on 2018-01-02.
@@ -16,6 +17,16 @@ public class Service implements Serializable{
     private String serviceType;
     //boosting/rotation etc
     private String inGameName;
+    private LocalDateTime date;
+
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
     public String getTitle() {
         return title;

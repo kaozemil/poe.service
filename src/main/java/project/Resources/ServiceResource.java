@@ -1,11 +1,7 @@
 package project.Resources;
 
-/**
- * Created by Emil on 2017-12-05.
- */
-
+import java.time.LocalDateTime;
 import project.entities.Service;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.json.JsonObject;
@@ -26,18 +22,14 @@ public class ServiceResource {
     @GET
     public Response getBoosting() {
         List<Service> serviceList = dbManager.getBoosting();
-        if(!serviceList.isEmpty()){
-            return Response.status(Response.Status.OK).entity(serviceList).build();
-        }else {
-            return Response.status(Response.Status.OK).entity("No boosting service found.").build();
-        }
+        return getServiceResponse(serviceList);
     }
 
     @Path("boosting")
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
     public Response createBoosting(JsonObject service){
-        createService(service);
+        createServiceResponse(service);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -60,11 +52,7 @@ public class ServiceResource {
     @GET
     public Response getTeaming() {
         List<Service> serviceList = dbManager.getTeaming();
-        if(!serviceList.isEmpty()){
-            return Response.status(Response.Status.OK).entity(serviceList).build();
-        }else {
-            return Response.status(Response.Status.OK).entity("No teaming service found.").build();
-        }
+        return getServiceResponse(serviceList);
     }
 
     @Path("teaming")
@@ -72,7 +60,7 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @POST
     public Response createTeaming(JsonObject service){
-        createService(service);
+        createServiceResponse(service);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -95,11 +83,7 @@ public class ServiceResource {
     @GET
     public Response getCrafting() {
         List<Service> serviceList = dbManager.getCrafting();
-        if(!serviceList.isEmpty()){
-            return Response.status(Response.Status.OK).entity(serviceList).build();
-        }else {
-            return Response.status(Response.Status.OK).entity("No crafting service found.").build();
-        }
+        return getServiceResponse(serviceList);
     }
 
     @Path("crafting")
@@ -107,7 +91,7 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @POST
     public Response createCrafting(JsonObject service){
-        createService(service);
+        createServiceResponse(service);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -130,11 +114,7 @@ public class ServiceResource {
     @GET
     public Response getRotation() {
         List<Service> serviceList = dbManager.getRotation();
-        if(!serviceList.isEmpty()){
-            return Response.status(Response.Status.OK).entity(serviceList).build();
-        }else {
-            return Response.status(Response.Status.OK).entity("No rotation service found.").build();
-        }
+        return getServiceResponse(serviceList);
     }
 
     @Path("rotation")
@@ -142,7 +122,7 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @POST
     public Response createRotation(JsonObject service){
-        createService(service);
+        createServiceResponse(service);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -160,12 +140,34 @@ public class ServiceResource {
         return null;
     }
     
-    public void createService(JsonObject payload){
+    public void createServiceResponse(JsonObject payload){
         Service service = new Service();
         service.setTitle(payload.getString("title"));
         service.setServiceType(payload.getString("serviceType"));
         service.setInGameName(payload.getString("inGameName"));
         service.setCreatedDate(payload.getString("createdDate"));
         dbManager.persistService(service);
+    }
+    
+    public Response getServiceResponse(List<Service> serviceList){
+        if(!serviceList.isEmpty()){
+            return Response.status(Response.Status.OK).entity(serviceList).build();
+        }else {
+            return Response.status(Response.Status.OK).entity("No service found.").build();
+        }
+    }
+    
+    @Path("test")
+    @Produces(MediaType.APPLICATION_JSON)
+    @POST
+    public Response createTest(JsonObject payload) {
+        Service service = new Service();
+        service.setTitle(payload.getString("title"));
+        service.setServiceType(payload.getString("serviceType"));
+        service.setInGameName(payload.getString("inGameName"));
+        service.setCreatedDate("2");
+        service.setDate(LocalDateTime.now());
+        dbManager.persistService(service);
+        return Response.status(Response.Status.OK).entity(service).build();
     }
 }

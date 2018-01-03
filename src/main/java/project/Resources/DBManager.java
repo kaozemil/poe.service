@@ -29,7 +29,7 @@ public class DBManager {
             List<Service> services = query.getResultList();
             return services;
         } else {
-            List<Service> services = new ArrayList<Service>();
+            List<Service> services = new ArrayList<>();
             return services;
         }
     }
@@ -39,7 +39,7 @@ public class DBManager {
         em.flush();
     }
     
-    public void cleanService(){
+    public void cleanServices(){
         TypedQuery<Service> query = em.createQuery("DELETE FROM Service WHERE createdDate='2'", Service.class);
         query.executeUpdate();
     }

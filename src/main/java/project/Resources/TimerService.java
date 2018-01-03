@@ -14,6 +14,6 @@ public class TimerService {
     private static int count = 0;
     @Schedule(second="*/15", minute="*", hour="*", persistent=false)
     public void execute() {
-        dbManager.cleanService();
+        dbManager.cleanServices();
     }
 }
