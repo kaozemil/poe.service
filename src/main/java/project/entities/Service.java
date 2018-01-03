@@ -1,22 +1,32 @@
 package project.entities;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.*;
-import java.util.List;
-
 /**
  * Created by Emil on 2018-01-02.
  */
 @Entity
-public class Service {
+public class Service implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String createdDate;
     private String title;
     private String serviceType;
     //boosting/rotation etc
     private String inGameName;
-    private String League;
+    private LocalDateTime date;
+
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
 
     public String getTitle() {
         return title;
@@ -40,5 +50,12 @@ public class Service {
 
     public void setInGameName(String inGameName) {
         this.inGameName = inGameName;
+    }
+    public String getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
     }
 }

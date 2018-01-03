@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="sun-appserv-samples@194.28.123.207" uuid="5bfd5a0b-5e76-4a70-a6b1-49cf63053e3f">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <introspection-schemas>*:APP</introspection-schemas>
+    </data-source>
+  </component>
+</project>
