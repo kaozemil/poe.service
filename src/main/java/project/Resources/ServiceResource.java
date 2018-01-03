@@ -51,7 +51,6 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @PUT
     public Response editBoosting(){
-
         return null;
     }
 
@@ -59,8 +58,8 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @DELETE
     public Response deleteBoosting() {
-
-        return null;
+        
+        return Response.status(Response.Status.OK).build();
     }
 
     @Path("teaming")
@@ -80,15 +79,18 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @POST
     public Response createTeaming(JsonObject teaming){
-
-        return null;
+        Service service = new Service();
+        service.setTitle(teaming.getString("title"));
+        service.setServiceType("Teaming");
+        service.setInGameName(teaming.getString("inGameName"));
+        dbManager.persistService(service);
+        return Response.status(Response.Status.OK).build();
     }
 
     @Path("teaming")
     @Produces(MediaType.APPLICATION_JSON)
     @PUT
     public Response editTeaming(){
-
         return null;
     }
 
@@ -96,7 +98,6 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @DELETE
     public Response deleteTeaming() {
-
         return null;
     }
 
@@ -117,15 +118,18 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @POST
     public Response createCrafting(JsonObject crafting){
-
-        return null;
+        Service service = new Service();
+        service.setTitle(crafting.getString("title"));
+        service.setServiceType("Crafting");
+        service.setInGameName(crafting.getString("inGameName"));
+        dbManager.persistService(service);
+        return Response.status(Response.Status.OK).build();
     }
 
     @Path("crafting")
     @Produces(MediaType.APPLICATION_JSON)
     @PUT
     public Response editCrafting(){
-
         return null;
     }
 
@@ -133,7 +137,6 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @DELETE
     public Response deleteCrafting() {
-
         return null;
     }
 
@@ -154,15 +157,18 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @POST
     public Response createRotation(JsonObject rotation){
-
-        return null;
+        Service service = new Service();
+        service.setTitle(rotation.getString("title"));
+        service.setServiceType("Rotation");
+        service.setInGameName(rotation.getString("inGameName"));
+        dbManager.persistService(service);
+        return Response.status(Response.Status.OK).build();
     }
 
     @Path("rotation")
     @Produces(MediaType.APPLICATION_JSON)
     @PUT
     public Response editRotation(){
-
         return null;
     }
 
@@ -170,7 +176,6 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @DELETE
     public Response deleteRotation() {
-
         return null;
     }
 
