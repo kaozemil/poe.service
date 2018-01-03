@@ -16,6 +16,7 @@ public class Service {
     private String serviceType;
     //boosting/rotation etc
     private String inGameName;
+    private String League;
 
     public String getTitle() {
         return title;
