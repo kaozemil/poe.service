@@ -20,6 +20,10 @@ public class DBManager {
     EntityManager em;
 
 
+    public void createTemp(){
+        
+    }
+    
     public List<Service> execute(TypedQuery query) {
         if(!query.getResultList().isEmpty()) {
             List<Service> services = query.getResultList();
@@ -33,6 +37,11 @@ public class DBManager {
     public void persistService(Service service){
         em.persist(service);
         em.flush();
+    }
+    
+    public void cleanService(){
+        TypedQuery<Service> query = em.createQuery("DELETE FROM Service WHERE createdDate='2'", Service.class);
+        query.executeUpdate();
     }
 
     public List<Service> getBoosting(){

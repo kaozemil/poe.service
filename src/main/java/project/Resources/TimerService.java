@@ -1,20 +1,19 @@
 package project.Resources;
 
-import javax.ejb.*;
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import javax.ejb.EJB;
+import javax.ejb.Schedule;
+import javax.ejb.Startup;
+import javax.ejb.Singleton;
 
-@Startup
 @Singleton
+@Startup
 public class TimerService {
-
-    @Inject
-    Event<BestEvent> event;
-
-    @Schedule(hour = "*", minute = "*", second = "*/5", info = "Every 5 seconds timer", persistent = false)
-    public void runEveryMinute() {
-        event.fire(new BestEvent());
+    
+    @EJB
+    DBManager dbManager;
+    private static int count = 0;
+    @Schedule(second="*/15", minute="*", hour="*", persistent=false)
+    public void execute() {
+        dbManager.cleanService();
     }
-
 }

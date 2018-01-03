@@ -7,11 +7,8 @@ package project.Resources;
 import project.entities.Service;
 
 import javax.ejb.EJB;
-import javax.ejb.Schedules;
 import javax.ejb.Stateless;
 import javax.json.JsonObject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -39,12 +36,8 @@ public class ServiceResource {
     @Path("boosting")
     @Consumes(MediaType.APPLICATION_JSON)
     @POST
-    public Response createBoosting(JsonObject boosting){
-        Service service = new Service();
-        service.setTitle(boosting.getString("title"));
-        service.setServiceType("Boosting");
-        service.setInGameName(boosting.getString("inGameName"));
-        dbManager.persistService(service);
+    public Response createBoosting(JsonObject service){
+        createService(service);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -59,7 +52,6 @@ public class ServiceResource {
     @Produces(MediaType.APPLICATION_JSON)
     @DELETE
     public Response deleteBoosting() {
-        
         return Response.status(Response.Status.OK).build();
     }
 
@@ -79,12 +71,8 @@ public class ServiceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @POST
-    public Response createTeaming(JsonObject teaming){
-        Service service = new Service();
-        service.setTitle(teaming.getString("title"));
-        service.setServiceType("Teaming");
-        service.setInGameName(teaming.getString("inGameName"));
-        dbManager.persistService(service);
+    public Response createTeaming(JsonObject service){
+        createService(service);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -118,12 +106,8 @@ public class ServiceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @POST
-    public Response createCrafting(JsonObject crafting){
-        Service service = new Service();
-        service.setTitle(crafting.getString("title"));
-        service.setServiceType("Crafting");
-        service.setInGameName(crafting.getString("inGameName"));
-        dbManager.persistService(service);
+    public Response createCrafting(JsonObject service){
+        createService(service);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -157,12 +141,8 @@ public class ServiceResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @POST
-    public Response createRotation(JsonObject rotation){
-        Service service = new Service();
-        service.setTitle(rotation.getString("title"));
-        service.setServiceType("Rotation");
-        service.setInGameName(rotation.getString("inGameName"));
-        dbManager.persistService(service);
+    public Response createRotation(JsonObject service){
+        createService(service);
         return Response.status(Response.Status.OK).build();
     }
 
@@ -179,5 +159,13 @@ public class ServiceResource {
     public Response deleteRotation() {
         return null;
     }
-
+    
+    public void createService(JsonObject payload){
+        Service service = new Service();
+        service.setTitle(payload.getString("title"));
+        service.setServiceType(payload.getString("serviceType"));
+        service.setInGameName(payload.getString("inGameName"));
+        service.setCreatedDate(payload.getString("createdDate"));
+        dbManager.persistService(service);
+    }
 }
