@@ -7,6 +7,7 @@ package project.Resources;
 import project.entities.Service;
 
 import javax.ejb.EJB;
+import javax.ejb.Schedules;
 import javax.ejb.Stateless;
 import javax.json.JsonObject;
 import javax.persistence.EntityManager;
