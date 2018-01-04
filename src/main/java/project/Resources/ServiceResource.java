@@ -8,7 +8,7 @@ import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
+import java.util.*;
 
 @Path("service")
 @Stateless
@@ -145,7 +145,7 @@ public class ServiceResource {
         service.setTitle(payload.getString("title"));
         service.setServiceType(payload.getString("serviceType"));
         service.setInGameName(payload.getString("inGameName"));
-        service.setCreatedDate(payload.getString("createdDate"));
+        service.setremoveDate(LocalDateTime.now().plusMinutes(payload.getInt("removeDate")));
         dbManager.persistService(service);
     }
     
@@ -155,19 +155,5 @@ public class ServiceResource {
         }else {
             return Response.status(Response.Status.OK).entity("No service found.").build();
         }
-    }
-    
-    @Path("test")
-    @Produces(MediaType.APPLICATION_JSON)
-    @POST
-    public Response createTest(JsonObject payload) {
-        Service service = new Service();
-        service.setTitle(payload.getString("title"));
-        service.setServiceType(payload.getString("serviceType"));
-        service.setInGameName(payload.getString("inGameName"));
-        service.setCreatedDate("2");
-        service.setDate(LocalDateTime.now());
-        dbManager.persistService(service);
-        return Response.status(Response.Status.OK).entity(service).build();
     }
 }
