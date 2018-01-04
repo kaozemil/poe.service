@@ -3,29 +3,29 @@ package project.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.*;
+import project.service.LocalDateTimeAttributeConverter;
 /**
  * Created by Emil on 2018-01-02.
  */
 @Entity
-public class Service implements Serializable{
+public class Service implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String createdDate;
     private String title;
     private String serviceType;
-    //boosting/rotation etc
     private String inGameName;
-    private LocalDateTime date;
+    @Column
+    @Convert(converter = LocalDateTimeAttributeConverter.class)
+    private LocalDateTime removeDate;
 
-
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getremoveDate() {
+        return removeDate;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setremoveDate(LocalDateTime date) {
+        this.removeDate = date;
     }
 
     public String getTitle() {
@@ -50,12 +50,5 @@ public class Service implements Serializable{
 
     public void setInGameName(String inGameName) {
         this.inGameName = inGameName;
-    }
-    public String getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
     }
 }

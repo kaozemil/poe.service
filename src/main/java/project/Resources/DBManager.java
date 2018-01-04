@@ -1,6 +1,7 @@
 package project.Resources;
 
 
+import java.time.LocalDateTime;
 import project.entities.Service;
 
 import javax.ejb.Stateless;
@@ -40,7 +41,8 @@ public class DBManager {
     }
     
     public void cleanServices(){
-        TypedQuery<Service> query = em.createQuery("DELETE FROM Service WHERE createdDate='2'", Service.class);
+        TypedQuery<Service> query = em.createQuery("DELETE FROM Service WHERE removeDate<:now", Service.class);
+        query.setParameter("now", LocalDateTime.now());
         query.executeUpdate();
     }
 
