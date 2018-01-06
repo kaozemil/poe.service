@@ -17,127 +17,20 @@ public class ServiceResource {
     @EJB
     private DBManager dbManager;
 
-    @Path("boosting")
-    @Produces(MediaType.APPLICATION_JSON)
-    @GET
-    public Response getBoosting() {
-        List<Service> serviceList = dbManager.getBoosting();
-        return getServiceResponse(serviceList);
-    }
-
-    @Path("boosting")
     @Consumes(MediaType.APPLICATION_JSON)
-    @POST
-    public Response createBoosting(JsonObject service){
-        createServiceResponse(service);
-        return Response.status(Response.Status.OK).build();
-    }
-
-    @Path("boosting")
-    @Produces(MediaType.APPLICATION_JSON)
-    @PUT
-    public Response editBoosting(){
-        return null;
-    }
-
-    @Path("boosting")
-    @Produces(MediaType.APPLICATION_JSON)
-    @DELETE
-    public Response deleteBoosting() {
-        return Response.status(Response.Status.OK).build();
-    }
-
-    @Path("teaming")
     @Produces(MediaType.APPLICATION_JSON)
     @GET
-    public Response getTeaming() {
-        List<Service> serviceList = dbManager.getTeaming();
+    public Response getService(@QueryParam("serviceType") String serviceType, @QueryParam("league") String league) {
+        List<Service> serviceList = dbManager.getServiceList(serviceType, league);
         return getServiceResponse(serviceList);
     }
-
-    @Path("teaming")
+    
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @POST
-    public Response createTeaming(JsonObject service){
+    public Response createService(JsonObject service){
         createServiceResponse(service);
         return Response.status(Response.Status.OK).build();
-    }
-
-    @Path("teaming")
-    @Produces(MediaType.APPLICATION_JSON)
-    @PUT
-    public Response editTeaming(){
-        return null;
-    }
-
-    @Path("teaming")
-    @Produces(MediaType.APPLICATION_JSON)
-    @DELETE
-    public Response deleteTeaming() {
-        return null;
-    }
-
-    @Path("crafting")
-    @Produces(MediaType.APPLICATION_JSON)
-    @GET
-    public Response getCrafting() {
-        List<Service> serviceList = dbManager.getCrafting();
-        return getServiceResponse(serviceList);
-    }
-
-    @Path("crafting")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @POST
-    public Response createCrafting(JsonObject service){
-        createServiceResponse(service);
-        return Response.status(Response.Status.OK).build();
-    }
-
-    @Path("crafting")
-    @Produces(MediaType.APPLICATION_JSON)
-    @PUT
-    public Response editCrafting(){
-        return null;
-    }
-
-    @Path("crafting")
-    @Produces(MediaType.APPLICATION_JSON)
-    @DELETE
-    public Response deleteCrafting() {
-        return null;
-    }
-
-    @Path("rotation")
-    @Produces(MediaType.APPLICATION_JSON)
-    @GET
-    public Response getRotation() {
-        List<Service> serviceList = dbManager.getRotation();
-        return getServiceResponse(serviceList);
-    }
-
-    @Path("rotation")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @POST
-    public Response createRotation(JsonObject service){
-        createServiceResponse(service);
-        return Response.status(Response.Status.OK).build();
-    }
-
-    @Path("rotation")
-    @Produces(MediaType.APPLICATION_JSON)
-    @PUT
-    public Response editRotation(){
-        return null;
-    }
-
-    @Path("rotation")
-    @Produces(MediaType.APPLICATION_JSON)
-    @DELETE
-    public Response deleteRotation() {
-        return null;
     }
     
     public void createServiceResponse(JsonObject payload){
@@ -145,6 +38,7 @@ public class ServiceResource {
         service.setTitle(payload.getString("title"));
         service.setServiceType(payload.getString("serviceType"));
         service.setInGameName(payload.getString("inGameName"));
+        service.setLeague(payload.getString("league"));
         service.setremoveDate(LocalDateTime.now().plusMinutes(payload.getInt("removeDate")));
         dbManager.persistService(service);
     }

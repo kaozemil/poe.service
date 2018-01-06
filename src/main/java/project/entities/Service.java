@@ -16,6 +16,7 @@ public class Service implements Serializable {
     private String title;
     private String serviceType;
     private String inGameName;
+    private String league;
     @Column
     @Convert(converter = LocalDateTimeAttributeConverter.class)
     private LocalDateTime removeDate;
@@ -50,5 +51,13 @@ public class Service implements Serializable {
 
     public void setInGameName(String inGameName) {
         this.inGameName = inGameName;
+    }
+    
+    public String getLeague() {
+        return league;
+    }
+
+    public void setLeague(String league) {
+        this.league = league;
     }
 }
