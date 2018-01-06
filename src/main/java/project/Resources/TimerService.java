@@ -13,6 +13,6 @@ public class TimerService {
     DBManager dbManager;
     @Schedule(second="*/15", minute="*", hour="*", persistent=false)
     public void execute() {
-        dbManager.cleanServices();
+        dbManager.cleanUpServices();
     }
 }

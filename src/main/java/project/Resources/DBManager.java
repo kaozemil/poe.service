@@ -19,11 +19,6 @@ public class DBManager {
 
     @PersistenceContext(name = "dbmanager")
     EntityManager em;
-
-
-    public void createTemp(){
-        
-    }
     
     public List<Service> execute(TypedQuery query) {
         if(!query.getResultList().isEmpty()) {
@@ -40,29 +35,14 @@ public class DBManager {
         em.flush();
     }
     
-    public void cleanServices(){
+    public void cleanUpServices(){
         TypedQuery<Service> query = em.createQuery("DELETE FROM Service WHERE removeDate<:now", Service.class);
         query.setParameter("now", LocalDateTime.now());
         query.executeUpdate();
     }
-
-    public List<Service> getBoosting(){
-        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Boosting'", Service.class);
-        return execute(query);
-    }
-
-    public List getTeaming(){
-        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Teaming'", Service.class);
-        return execute(query);
-    }
-
-    public List getCrafting(){
-        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Crafting'", Service.class);
-        return execute(query);
-    }
-
-    public List getRotation(){
-        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='Rotation'", Service.class);
+    
+    public List<Service> getServiceList(String serviceType, String league){
+        TypedQuery<Service> query = em.createQuery("SELECT s FROM Service s WHERE  s.serviceType='" + serviceType + "' AND s.league='" + league + "'", Service.class);
         return execute(query);
     }
 }
