@@ -2,7 +2,10 @@
 <project version="4">
   <component name="dataSourceStorageLocal">
     <data-source name="sun-appserv-samples@194.28.123.207" uuid="5bfd5a0b-5e76-4a70-a6b1-49cf63053e3f">
-      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <database-info product="Apache Derby" version="10.13.1.1 - (Unversioned directory)" jdbc-version="4.2" driver-name="Apache Derby Network Client JDBC Driver" driver-version="10.13.1.1 - (1765088)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <introspection-schemas>*:APP</introspection-schemas>
     </data-source>
   </component>

@@ -24,23 +24,27 @@
       <SequenceIdentity>1</SequenceIdentity>
       <DefaultExpression>GENERATED_BY_DEFAULT</DefaultExpression>
     </column>
-    <column id="15" parent="13" name="LEAGUE">
+    <column id="15" parent="13" name="INGAMENAME">
       <Position>2</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="16" parent="13" name="INGAMENAME">
+    <column id="16" parent="13" name="LEAGUE">
       <Position>3</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <column id="17" parent="13" name="SERVICETYPE">
+    <column id="17" parent="13" name="REMOVEDATE">
       <Position>4</Position>
-      <DataType>VARCHAR(255)|12</DataType>
+      <DataType>TIMESTAMP(29,9)|93</DataType>
     </column>
-    <column id="18" parent="13" name="TITLE">
+    <column id="18" parent="13" name="SERVICETYPE">
       <Position>5</Position>
       <DataType>VARCHAR(255)|12</DataType>
     </column>
-    <key id="19" parent="13" name="SQL180103104246750">
+    <column id="19" parent="13" name="TITLE">
+      <Position>6</Position>
+      <DataType>VARCHAR(255)|12</DataType>
+    </column>
+    <key id="20" parent="13" name="SQL180115215024740">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ID</ColNames>
       <Primary>1</Primary>

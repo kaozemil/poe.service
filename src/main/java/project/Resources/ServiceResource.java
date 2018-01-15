@@ -39,7 +39,7 @@ public class ServiceResource {
         service.setServiceType(payload.getString("serviceType"));
         service.setInGameName(payload.getString("inGameName"));
         service.setLeague(payload.getString("league"));
-        service.setremoveDate(LocalDateTime.now().plusMinutes(payload.getInt("removeDate")));
+        service.setremoveDate(LocalDateTime.now().plusHours(payload.getInt("removeDate")));
         dbManager.persistService(service);
     }
     
